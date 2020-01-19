@@ -1,6 +1,10 @@
 type t 
-type axis
+type axis = X | Y | Z
 
-val transpose : t -> t
-val rotatation_matrix : float -> axis -> t
-val rotate : t -> Vector.t -> Vector.t
+val pi : float
+val half_pi : float
+
+(* val transpose : t -> t *)
+val (@->) : t -> t -> t
+val rot_mat : float -> axis -> t
+val rot : t -> Vector.t -> Vector.t

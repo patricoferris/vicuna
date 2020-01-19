@@ -21,14 +21,13 @@ let get_ray_dir camDir camUp coord res planeDist =
 let ray_march position direction = 
     let step = ref 0 in 
     let pos = ref position in
-    let circle = Shapes.make_circle 4. (vector 0. (0.0) 20.) in
+    let circle = Shapes.make_cube (const 3.) (vector 0. (-1.0) 20.) in
     let dist = ref (Shapes.sdf position circle) in 
         while ((abs_float !dist) > 0.01 && !step < 50) do
             pos := add !pos (scale (!dist) direction);
             dist := Shapes.sdf !pos circle;
             step := !step + 1
         done;
-         
         let light_source = vector 2. 0. 19. in 
         let background = Color.color 244 244 244 in
         if !step < 50 then Shade.illuminate !pos light_source circle else background

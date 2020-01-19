@@ -39,6 +39,6 @@ let scan dimX dimY =
                 write oc (Color.color_to_string c) 
         done;
         write oc "\n";
-    done
+    done 
 
 let () = scan dimX dimY

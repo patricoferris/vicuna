@@ -1,9 +1,9 @@
 open Vector
 
 let diffuse pos normal light = 
-  let pos_to_light = norm (sub light pos) in
-  let dot_p = dot normal pos_to_light in
-      min 1.0 (max dot_p 0.0) 
+  let pos_to_light = norm (sub light pos) in 
+  let dot_p = dot normal pos_to_light in 
+      min 1.0 (max (abs_float dot_p) 0.0) 
 
 let specular pos normal light = 
   let pos_to_light = norm (sub light pos) in 
@@ -21,4 +21,4 @@ let illuminate pos light shape =
   let red = color 255 0 0 in
   let _white = color 255 255 255 in
     scale diff red
-    (* mix (scale diff red) (scale spec white) *)
+    (* mix (scale diff red) (scale _spec _white) *)
