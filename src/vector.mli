@@ -18,6 +18,8 @@ val abs : t -> t
 val vmax : t -> float -> t
 val vmin : t -> float -> t
 
+val equal : t -> t -> bool
+
 val const : float -> t
 (** Const takes a float, f, and generate the vector of { x = f; y = f; z = f } *)
 

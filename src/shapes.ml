@@ -14,7 +14,7 @@ let make_cube dim pos = Cube (dim, pos, Transforms.const 1.)
 let sdf pos = function 
   | Circle (r, shape_pos, t) -> (length (t $ (sub pos shape_pos))) -. r
   | Cube (dim, shape_pos, t) -> 
-    let q = sub (Vector.abs (t $ (sub pos shape_pos))) dim in
+    let q = sub (Vector.abs (t $ (sub pos shape_pos))) dim in 
     let q_x = get_x q and q_y = get_y q and q_z = get_z q in 
       (length (vmax q 0.0)) +. (min (max q_x (max q_y q_z)) 0.0)
 
