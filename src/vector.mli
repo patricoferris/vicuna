@@ -2,11 +2,12 @@
 
 type t
 
-val vector: float -> float -> float -> t
+val vector: float -> float -> float -> float -> t
 
 val get_x: t -> float
 val get_y: t -> float 
 val get_z: t -> float
+val get_w: t -> float
 
 val add : t -> t -> t
 val sub : t -> t -> t
