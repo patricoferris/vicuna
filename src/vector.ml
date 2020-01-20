@@ -31,6 +31,15 @@ let equal v1 v2 =
 		eq_ep (get_z v1) (get_z v2) ep &&
 		eq_ep (get_w v1) (get_w v2) ep
 
+let to_array v = 
+	let arr = Array.make 4 0. in 
+		arr.(0) <- (get_x v); arr.(1) <- (get_y v); arr.(2) <- (get_z v); arr.(3) <- (get_w v); arr 
+
+exception ArrayTooSmall
+let from_array arr = 
+	if Array.length arr < 4 then raise ArrayTooSmall
+	else { x = arr.(0); y = arr.(1); z = arr.(2); w = arr.(3); }
+
 let cross a b = 
     { x = a.y *. b.z -. a.z *. b.y;
       y = a.z *. b.x -. a.x *. b.z;

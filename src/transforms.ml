@@ -72,7 +72,14 @@ let equal m n =
 		Vector.equal m3 n3 &&
 		Vector.equal m4 n4 
 
-
+let to_array m =
+	let (m1, m2, m3, m4) = m in 
+	let arr = Array.make_matrix 4 4 1. in 
+		arr.(0) <- Vector.to_array m1;
+		arr.(1) <- Vector.to_array m2;
+		arr.(2) <- Vector.to_array m3;
+		arr.(3) <- Vector.to_array m4;
+		arr
 
 let inverse m = m
 

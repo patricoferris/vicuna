@@ -2,6 +2,8 @@
 
 type t
 
+exception ArrayTooSmall
+
 val vector: float -> float -> float -> float -> t
 
 val get_x: t -> float
@@ -19,7 +21,8 @@ val vmax : t -> float -> t
 val vmin : t -> float -> t
 
 val equal : t -> t -> bool
-
+val to_array : t -> float array
+val from_array : float array -> t
 val const : float -> t
 (** Const takes a float, f, and generate the vector of { x = f; y = f; z = f } *)
 
