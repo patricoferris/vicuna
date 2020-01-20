@@ -1,7 +1,7 @@
 # Vicuña 🦙
 ------
 
-**Note this is not supposed to be an fast, memory-optimised implementation of a ray-marching algorithm. Instead it was done for fun and educational purposes. There are lots of ways I know to make it better or faster, but that's not really the point at the moment.** 
+**Note this is not supposed to be a fast, memory-optimised implementation of a ray-marching algorithm. Instead it was done for fun and educational purposes. There are lots of ways I know to make it better or faster, but that's not really the point at the moment.** 
 
 The code generates a scene and places it in `image.ppm` with the following header: 
 

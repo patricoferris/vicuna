@@ -2,4 +2,5 @@ _build
 src/_build
 
 *.ppm
+!image.ppm
 .merlin
