@@ -18,7 +18,7 @@ let illuminate pos light shape =
   let diff = diffuse pos normal light in
   let _spec = specular pos normal light in 
   let open Color in 
-  let red = color 255 0 0 in
-  let _white = color 255 255 255 in
-    scale diff red
+  let color = Shapes.get_color shape in
+  let _white = Color.color 255 255 255 in
+    scale diff color
     (* mix (scale diff red) (scale _spec _white) *)
