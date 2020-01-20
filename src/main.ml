@@ -27,7 +27,7 @@ let scan dimX dimY =
     let camUp =  vector 0. 1. 0. 1. in
     let res = vector (float_of_int dimX) (float_of_int dimY) 0. 1. in
     let planeDist = 3. in
-    let oc = open_out "test.ppm" in
+    let oc = open_out "image.ppm" in
     write_hdr oc;
     for i = 0 to dimY - 1 do 
         for j = 0 to dimX - 1 do 
