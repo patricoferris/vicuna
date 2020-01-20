@@ -20,25 +20,24 @@ let write_hdr oc =
     write_line oc ppm_hdr_3
 
 let scan dimX dimY = 
-    let xcoord = ref 0. in 
-    let ycoord = ref 0. in
-    let zcoord = ref 0. in
     let camDir = vector 0. 0. 1. 1. in
     let camUp =  vector 0. 1. 0. 1. in
     let res = vector (float_of_int dimX) (float_of_int dimY) 0. 1. in
     let planeDist = 3. in
     let oc = open_out "image.ppm" in
     write_hdr oc;
+    let lines = ref [] in 
     for i = 0 to dimY - 1 do 
+        let line = ref [] in 
         for j = 0 to dimX - 1 do 
-            xcoord := float_of_int j /. float_of_int dimX;
-            ycoord := float_of_int i /. float_of_int dimY;
-            let pos = vector !xcoord !ycoord !zcoord 1. in
+            let xcoord = float_of_int j /. float_of_int dimX in 
+            let ycoord = float_of_int i /. float_of_int dimY in
+            let pos = vector xcoord ycoord 0. 1. in
             let dir = Rays.get_ray_dir camDir camUp pos res planeDist in
             let c = Rays.ray_march (const 0.) dir in
-                write oc (Color.color_to_string c) 
+               line := (Color.color_to_string c) :: !line
         done;
-        write oc "\n";
-    done 
-
+        lines := !line :: !lines 
+    done;
+    List.iter (fun line -> write_line oc (String.concat "" (List.rev line))) !lines 
 let () = scan dimX dimY

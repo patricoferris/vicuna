@@ -1,6 +1,9 @@
 open Vector
 open Transforms
 
+let precision = 0.01
+let step = 35
+
 let resolution_scale a res = 
     let x = get_x a in 
     let y = get_y a in 
@@ -20,19 +23,21 @@ let get_ray_dir camDir camUp coord res planeDist =
         norm (add cs (add cu cd)) 
 
 let ray_march position direction = 
-    let step = ref 0 in 
+    let sp = ref 0 in 
     let pos = ref position in
-    let cube = Shapes.make_cube (Vector.const 3.) (vector 0. (-1.0) 20. 1.) (Color.color 0 255 0) in
+    let cube = Shapes.make_cube (Vector.const 1.) (vector 0. (-1.0) 20. 1.) (Color.color 0 255 0) in
     let translation = trans_mat 1. (-1.) 0. in 
     let rotation_x  = rot_mat (half_pi /. 2.) X in 
     let rotation_y  = rot_mat (half_pi /. 2.) Y in 
     let cube = Shapes.apply_transform (translation @-> rotation_x @-> rotation_y) cube in
-    let dist = ref (Shapes.sdf position cube) in 
-        while ((abs_float !dist) > 0.01 && !step < 50) do
-            pos := add !pos (scale (!dist) direction);
-            dist := Shapes.sdf !pos cube;
-            step := !step + 1
+    let circle = Shapes.make_circle 2. (vector 0. (-1.0) 20. 1.) (Color.color 255 0 0) in 
+    let light_source = vector 2. 0. 19. 1. in 
+    let scene = Scene.scene ([cube; circle]) ([light_source]) in 
+    let closest = ref (Scene.sdf position scene) in 
+        while ((abs_float (!closest).dist) > precision && !sp < step) do
+            pos := add !pos (scale ((!closest).dist) direction);
+            closest := Scene.sdf !pos scene;
+            sp := !sp + 1
         done;
-        let light_source = vector 2. 0. 19. 1. in 
         let background = Color.color 244 244 244 in
-        if !step < 50 then Shade.illuminate !pos light_source cube else background
+        if !sp < step then Shade.illuminate !pos scene (!closest).shape else background

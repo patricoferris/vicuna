@@ -18,9 +18,11 @@ cd src
 dune exec -- ./main.exe
 ```
 
+![An example image](./examples/image.png)
+
 ------
 
 Some todos: 
-  - Finish the `scene` making tool so a large number of shapes can be drawn
+  - Finish the `scene` making tool so a large number of shapes can be drawn - X
   - Double check some of the maths (almost sure some of the `x` or `y` coordinates are the wrong way around 🐫)
-  - Finish writing the inverse matrix function for proper transformations 
+  - Finish writing the inverse matrix function for proper transformations

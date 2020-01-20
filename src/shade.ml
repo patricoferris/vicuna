@@ -13,7 +13,8 @@ let specular pos normal light =
   let rv = dot (norm pos) (r) in 
     (min 1. rv) ** 50.
 
-let illuminate pos light shape = 
+
+let calc_color pos shape light = 
   let normal = Shapes.normal pos shape in 
   let diff = diffuse pos normal light in
   let _spec = specular pos normal light in 
@@ -21,4 +22,9 @@ let illuminate pos light shape =
   let color = Shapes.get_color shape in
   let _white = Color.color 255 255 255 in
     scale diff color
+
+let illuminate pos scene shape = 
+  let light = List.hd (Scene.get_lights scene) in 
+    calc_color pos shape light 
+  
     (* mix (scale diff red) (scale _spec _white) *)
