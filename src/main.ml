@@ -2,19 +2,16 @@
 open Printf
 open Vector
 
-let dimX = 1080
-let dimY = 720
-let ppm_hdr_1 = "P3"
-let ppm_hdr_2 = string_of_int dimX ^ " " ^ string_of_int dimY
-let ppm_hdr_3 = "255"
-
 let write_line oc line = 
     fprintf oc "%s\n" line
 
 let write oc line = 
     fprintf oc "%s" line
 
-let write_hdr oc = 
+let write_hdr oc dimX dimY = 
+	let ppm_hdr_1 = "P3" in 
+	let ppm_hdr_2 = string_of_int dimX ^ " " ^ string_of_int dimY in 
+	let ppm_hdr_3 = "255" in 
     write_line oc ppm_hdr_1;
     write_line oc ppm_hdr_2;
     write_line oc ppm_hdr_3
@@ -40,6 +37,6 @@ let scan scene dimX dimY =
         lines := !line :: !lines 
     done;
     let oc = open_out "image.ppm" in
-        write_hdr oc;
+        write_hdr oc dimX dimY;
         List.iter (fun line -> write_line oc (String.concat "" (List.rev line))) !lines;
         close_out oc
