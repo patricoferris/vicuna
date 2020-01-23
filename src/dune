@@ -1,5 +1,7 @@
 (library
  (name vicuna)
  (public_name vicuna)
- (libraries core fmt))
+ (preprocess (pps lwt_ppx))
+ (ocamlopt_flags (-p))
+ (libraries core fmt cohttp-lwt-unix))
 

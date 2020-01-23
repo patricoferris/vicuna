@@ -1,3 +1,4 @@
 (executable
   (libraries vicuna)
+  (ocamlopt_flags -p)
   (name main))

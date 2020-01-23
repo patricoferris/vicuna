@@ -21,7 +21,7 @@ let get_ray_dir camera coord res planeDist =
     let cd = scale planeDist (get_dir camera) in 
         norm (add cs (add cu cd)) 
 
-let ray_march position direction scene = 
+let ray_march position scene direction = 
     let sp = ref 0 in 
     let pos = ref position in
     let closest = ref (Scene.sdf position scene) in 
