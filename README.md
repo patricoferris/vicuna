@@ -11,10 +11,10 @@ P3
 255
 ```
 
-To run the code, the following should work: 
+A working example can be found in `/examples` - in order to run the code you will need to have `dune` installed: 
 
 ```
-cd src 
+cd examples
 dune exec -- ./main.exe
 ```
 

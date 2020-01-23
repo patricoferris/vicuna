@@ -19,17 +19,7 @@ let write_hdr oc =
     write_line oc ppm_hdr_2;
     write_line oc ppm_hdr_3
 
-let scene =
-    let cube = Shapes.make_cube (Vector.const 1.) (vector 0. (-1.0) 20. 1.) (Color.color 0 255 0) in
-    let translation = Transforms.trans_mat 1. (-1.) 0. in 
-    let rotation_x  = Transforms.(rot_mat (half_pi /. 2.) X) in 
-    let rotation_y  = Transforms.(rot_mat (half_pi /. 2.) Y) in 
-    let cube = Shapes.apply_transform Transforms.(translation @-> rotation_x @-> rotation_y) cube in
-    let circle = Shapes.make_circle 2. (vector 0. (-1.0) 20. 1.) (Color.color 255 0 0) in 
-    let light_source = vector 2. 0. 19. 1. in 
-        Scene.scene ([cube; circle]) ([light_source])
-
-let scan dimX dimY = 
+let scan scene dimX dimY = 
     let camDir = vector 0. 0. 1. 1. in
     let camUp =  vector 0. 1. 0. 1. in
     let camSide = norm (cross camUp camDir) in 
@@ -53,5 +43,3 @@ let scan dimX dimY =
         write_hdr oc;
         List.iter (fun line -> write_line oc (String.concat "" (List.rev line))) !lines;
         close_out oc
-
-let () = scan dimX dimY

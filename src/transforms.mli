@@ -13,4 +13,4 @@ val trans_mat : float -> float -> float -> t
 
 val to_array : t -> float array array
 val equal : t -> t -> bool
-val pp_trans : out_channel -> t -> unit 
+val pp_trans : Format.formatter -> t -> unit 

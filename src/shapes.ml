@@ -42,5 +42,5 @@ let apply_transform trans = function
   | Cube (dim, pos, t, c) -> Cube (dim, pos, trans @-> t, c)
 
 let pp_shape oc = function 
-  | Circle (r, pos, _, _) -> Printf.fprintf oc "CIRCLE with Radius: %f Position: " r; Vector.pp_vec oc pos 
-  | Cube (dim, pos, _, _) -> Vector.pp_vec oc dim; Vector.pp_vec oc pos 
+  | Circle (r, pos, _, _) -> Printf.fprintf oc "CIRCLE with Radius: %f Position: " r; Vector.pp_vec Fmt.stdout pos 
+  | Cube (dim, pos, _, _) -> Vector.pp_vec Fmt.stdout dim; Vector.pp_vec Fmt.stdout pos 

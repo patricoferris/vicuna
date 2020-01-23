@@ -28,4 +28,4 @@ val const : float -> t
 
 val scale : float -> t -> t
 val norm : t -> t 
-val pp_vec : out_channel -> t -> unit 
+val pp_vec : Format.formatter -> t -> unit 

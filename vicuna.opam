@@ -1,0 +1,15 @@
+opam-version: "2.0"
+authors: ["Patrick Ferris"]
+homepage: "https://github.com/patricoferris/vicuna"
+bug-reports: "https://github.com/patricoferris/vicuna/issues"
+
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+
+build-test: ["dune" "runtest" "-p" name]
+
+depends: [
+  "dune" {build}
+  "alcotest" {with-test}
+]

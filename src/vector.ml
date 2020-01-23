@@ -20,7 +20,7 @@ let norm a =
     let normalization_constant = length a in 
         scale (1.0 /. normalization_constant) a
 
-let pp_vec oc a = Printf.fprintf oc "(%f, %f, %f, %f) \n" a.x a.y a.z a.w
+let pp_vec ppf a = Fmt.pf ppf "(%f, %f, %f, %f) \n" a.x a.y a.z a.w
 
 let eq_ep f1 f2 ep = (Float.abs(f1 -. f2)) < ep
 
