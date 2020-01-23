@@ -26,7 +26,7 @@ let eq_ep f1 f2 ep = (Float.abs(f1 -. f2)) < ep
 
 let equal v1 v2 = 
 	let ep = 0.00001 in 
-    	eq_ep (get_x v1) (get_x v2) ep &&
+    eq_ep (get_x v1) (get_x v2) ep &&
 		eq_ep (get_y v1) (get_y v2) ep &&
 		eq_ep (get_z v1) (get_z v2) ep &&
 		eq_ep (get_w v1) (get_w v2) ep

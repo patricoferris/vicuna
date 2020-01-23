@@ -1,4 +1,5 @@
 open Vector
+open Camera 
 
 let precision = 0.01
 let step = 35
@@ -11,14 +12,13 @@ let resolution_scale a res =
         vector (x *. (res_x /. res_y)) y z 1.
 
 (* Ray Marching Functions *)
-let get_ray_dir camDir camUp coord res planeDist =
-    let camSide = norm (cross camUp camDir) in 
+let get_ray_dir camera coord res planeDist =
     let coord = (sub (scale 2.0 coord) (Vector.const 1.0)) in
     let p = resolution_scale coord res in
     let p_x = get_x p and p_y = get_y p in 
-    let cs = scale p_x camSide in 
-    let cu = scale p_y camUp in
-    let cd = scale planeDist camDir in 
+    let cs = scale p_x (get_side camera) in 
+    let cu = scale p_y (get_up camera) in
+    let cd = scale planeDist (get_dir camera) in 
         norm (add cs (add cu cd)) 
 
 let ray_march position direction scene = 

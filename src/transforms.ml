@@ -81,8 +81,6 @@ let to_array m =
 		arr.(3) <- Vector.to_array m4;
 		arr
 
-let inverse m = m
-
 let pp_trans oc t = 
 	let (r1, r2, r3, r4) = t in 
 		print_endline "TRANSFORM";
