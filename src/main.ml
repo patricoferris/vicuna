@@ -19,6 +19,16 @@ let write_hdr oc =
     write_line oc ppm_hdr_2;
     write_line oc ppm_hdr_3
 
+let scene =
+    let cube = Shapes.make_cube (Vector.const 1.) (vector 0. (-1.0) 20. 1.) (Color.color 0 255 0) in
+    let translation = Transforms.trans_mat 1. (-1.) 0. in 
+    let rotation_x  = Transforms.(rot_mat (half_pi /. 2.) X) in 
+    let rotation_y  = Transforms.(rot_mat (half_pi /. 2.) Y) in 
+    let cube = Shapes.apply_transform Transforms.(translation @-> rotation_x @-> rotation_y) cube in
+    let circle = Shapes.make_circle 2. (vector 0. (-1.0) 20. 1.) (Color.color 255 0 0) in 
+    let light_source = vector 2. 0. 19. 1. in 
+        Scene.scene ([cube; circle]) ([light_source])
+
 let scan dimX dimY = 
     let camDir = vector 0. 0. 1. 1. in
     let camUp =  vector 0. 1. 0. 1. in
@@ -34,7 +44,7 @@ let scan dimX dimY =
             let ycoord = float_of_int i /. float_of_int dimY in
             let pos = vector xcoord ycoord 0. 1. in
             let dir = Rays.get_ray_dir camDir camUp pos res planeDist in
-            let c = Rays.ray_march (const 0.) dir in
+            let c = Rays.ray_march (const 0.) dir scene in
                line := (Color.color_to_string c) :: !line
         done;
         lines := !line :: !lines 
